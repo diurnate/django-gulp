@@ -2,19 +2,14 @@ import os
 import subprocess
 
 from django.conf import settings
-from django.contrib.staticfiles.management.commands.collectstatic import \
-    Command as BaseCommand
+from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 
 
 class Command(BaseCommand):
-    """
-    A version of collectstatic that runs `gulp build --production` first.
-    """
+    """Wrap gulp"""
 
     def handle(self, *args, **options):
-        if options['dry_run']:
-            return
 
         popen_kwargs = {
             'shell': True,
@@ -40,5 +35,3 @@ class Command(BaseCommand):
             subprocess.check_call(gulp_command, **popen_kwargs)
         except subprocess.CalledProcessError as e:
             raise CommandError(e)
-
-        super(Command, self).handle(*args, **options)
