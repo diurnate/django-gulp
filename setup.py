@@ -25,10 +25,6 @@ setup(
         'psutil>=5.2.2,<6.0',
     ],
 
-    setup_requires=[
-        'setuptools-markdown'
-    ],
-
     classifiers=[
         'Environment :: Web Environment',
 
